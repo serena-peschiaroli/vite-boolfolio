@@ -26,9 +26,9 @@ export default{
 
 <template>
     <div class="container">
-        <h2> La lista dei progetti:</h2>
-        <div class="row">
-            <div class="col" v-for="project in projects" key="project.id">
+        <h2 class="text-center mt-5"> La lista dei progetti:</h2>
+        <div class="row row-cols-3 gy-5 mt-2">
+            <div class="col d-flex align-self-stretch" v-for="project in projects" key="project.id">
                 <ProjectCard :project="project" />
 
             </div>
