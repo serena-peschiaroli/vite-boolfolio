@@ -1,5 +1,8 @@
 <script>
 import axios from 'axios';
+import ProjectCard from './ProjectCard.vue';
+
+
 export default{
     data(){
         return{
@@ -14,12 +17,23 @@ export default{
             this.projects = resp.data.results.data;
             console.log(resp.data.results.data);
         });
+    },
+    components: {
+        ProjectCard
     }
 }
 </script>
 
 <template>
-    <h1>test</h1>
+    <div class="container">
+        <h2> La lista dei progetti:</h2>
+        <div class="row">
+            <div class="col" v-for="project in projects" key="project.id">
+                <ProjectCard :project="project" />
+
+            </div>
+        </div>
+    </div>
 
 </template>
 
