@@ -1,4 +1,6 @@
 <script>
+import { store } from '../store';
+
 export default {
     props: {
         project: Object,
@@ -9,6 +11,7 @@ export default {
     },
     data(){
         return{
+            store,
            
 
         }
@@ -37,6 +40,7 @@ export default {
         <p class="card-text">Tipo: {{project.type? project.type.name : 'Nessun tipo specificato'  }}.</p>
         <p class="card-text">Descrizione: {{ project.description }}.</p>
         <p class="card-text">Repository: {{ project.repository_url }}.</p>
+         <router-link class="btn btn-success" :to="{ name: 'project-page', params: { slug: project.slug } }">Dettagli</router-link>
         
       </div>
     </div>
