@@ -1,22 +1,22 @@
 <script>
 import axios from 'axios';
-import ProjectCard from './ProjectCard.vue';
+import ProjectCard from '../components/ProjectCard.vue';
 
 
-export default{
-    data(){
-        return{
+export default {
+    data() {
+        return {
             baseUrl: 'http://127.0.0.1:8000',
             projects: [],
         }
     },
     created() {
         axios.get(`${this.baseUrl}/api/projects`)
-        .then((resp)=> {
-            
-            this.projects = resp.data.results.data;
-            console.log(resp.data.results.data);
-        });
+            .then((resp) => {
+
+                this.projects = resp.data.results.data;
+                console.log(resp.data.results.data);
+            });
     },
     components: {
         ProjectCard
@@ -34,9 +34,6 @@ export default{
             </div>
         </div>
     </div>
-
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,14 +1,18 @@
 <script>
-import AppMain from './components/AppMain.vue';
+import HomePage from './pages/HomePage.vue';
+import AppHeader from './components/AppHeader.vue';
+import { links } from './routes';
 
 export default {
   data() {
     return{
+      links,
 
     }
   },
   components: { 
-      AppMain,
+      HomePage,
+      AppHeader,
   }
 }
 
@@ -19,7 +23,10 @@ export default {
 
 <template>
   <div id="app">
-    <AppMain/>
+    
+    <AppHeader :links="links"></AppHeader>
+
+    <router-view></router-view>
   </div>
 
 </template>
