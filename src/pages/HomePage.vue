@@ -10,16 +10,34 @@ export default {
             store,
             projects: [],
             isLoading: true,
+            currentPage: 1, //pagina corrente x paginazione
+            lastPage: 1, // ultima pagina disponibile da risposta paginazione
+            total: 0, // numero totale di progetti disponibili
+            error: null, // registrare errori che avvengono durante chiamata 
         }
     },
     created() {
-        axios.get(`${this.store.baseUrl}/api/projects`)
-            .then((resp) => {
-
-                this.projects = resp.data.results.data;
-                console.log(resp.data.results.data);
+        this.getProjects();  // chiama il metodo quando il componente è creato x prendere progetti
+    },
+    methods: {
+        getProjects(){
+            this.isLoading = true;
+            axios.get(`${this.store.baseUrl}/api/projects`, {
+                params: {
+                    page: this.currentPage, // includi il numero pag corrente come parametro query x paginazione
+                }
+            })
+            .then((resp) => {  //se risposta positiva
+                this.projects = resp.data.results.data;  // aggiorna progetti con dati da risposta
+                this.lastPage = resp.data.results.lastPage; // aggiorna lastpage da risposta
+                this.total = resp.data.results.total; // aggiorna total da risposta
                 this.isLoading = false;
+            })
+            .catch((error) => { // risposta negativa 
+                this.error = error; // salva errori nei dati del componente 
+                this.isLoading = false; 
             });
+        }
     },
     components: {
         ProjectCard
