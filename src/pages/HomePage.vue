@@ -61,6 +61,13 @@ export default {
                 <ProjectCard :project="project" />
 
             </div>
+            
+        </div>
+        <!-- paginazione -->
+        <div>
+            <button v-if="currentPage > 1" class="btn btn-primary me-2" @click.prevent="getProjects(currentPage - 1)"> Precedente </button>
+
+            <button v-if="currentPage < lastPage" class="btn btn-primary" @click.prevent="getProjects(currentPage +1)"> Prossima</button>
         </div>
     </div>
 </template>
