@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import { router } from '../router';
 
 export default {
     data(){
@@ -19,6 +20,12 @@ export default {
             this.isLoading = false;
             console.log(`${store.baseUrl}/api/projects/${this.$route.params.slug}`);
         })
+        .catch((error) => {
+            this.isLoading = false;
+            console.log("Error:", error);
+            
+            this.$router.replace({name: 'not-found'});
+        });
         
     }
 }
@@ -39,7 +46,21 @@ export default {
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{curProject.title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{curProject.repository_url}}</h6>
+                    <h6 class="card-subtitle mb-2">Tipo: {{ curProject.type ? curProject.type.name : 'Nessun tipo specificato' }}.</h6>
+                    <div v-if="curProject.technologies.length > 0">
+                        <h6>Tecnologie usate:</h6>
+                        <ul class="list-unstyled">
+                        <li v-for="technology in curProject.technologies" :key="technology.id">
+                            <span class="badge" :style="{ backgroundColor: technology.color }">
+                            {{ technology.name }}
+                            </span>
+                        </li>
+                        </ul>
+                    </div>
+                    <div v-else>
+                        <p>Nessuna tecnologia specificata</p>
+                    </div>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     
                 </div>

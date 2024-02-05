@@ -34,7 +34,7 @@ export default {
               </li>
             </ul>
           </div>
-          <div v-else>
+        <div v-else>
             <p>Nessuna tecnologia specificata</p>
           </div>
         <p class="card-text">Tipo: {{project.type? project.type.name : 'Nessun tipo specificato'  }}.</p>
